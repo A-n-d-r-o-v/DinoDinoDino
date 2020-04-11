@@ -650,7 +650,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &108129682
 MonoBehaviour:
@@ -664,7 +664,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherObject: {fileID: 0}
-  spriteMask: {fileID: 1355344331661800, guid: 6f4862f529868784e9c9a1f8579c7a9c, type: 2}
+  spriteMask: {fileID: 331198549831173074, guid: 6f4862f529868784e9c9a1f8579c7a9c,
+    type: 2}
 --- !u!1001 &211679552
 Prefab:
   m_ObjectHideFlags: 0
@@ -878,11 +879,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 890370776}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.79, y: -2.29, z: 0}
+  m_LocalPosition: {x: 2.51, y: -5.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1204914928
 GameObject:

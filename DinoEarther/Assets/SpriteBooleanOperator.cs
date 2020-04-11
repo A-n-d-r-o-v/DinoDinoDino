@@ -37,11 +37,11 @@ public class SpriteBooleanOperator : MonoBehaviour {
 		// Vec2 array of this gameobjects poly collider (geometry to modify)
 		Vector2[] thisColliderPointArr = GetComponent<PolygonCollider2D> ().points;
 		Vector2 positionOffset = otherCollider.gameObject.transform.position - transform.position;
-		Vector2[] otherColliderPointArr = sum(otherCollider.points, positionOffset);
+		Vector2[] otherColliderPointArr = otherCollider.points;//sum(otherCollider.points, positionOffset);
 
 		// Vec2 array of the other gameobjects poly collider (hole geometry)
-		Vector2[] thisScreenSpaceArr = toScreenSpace (thisColliderPointArr);
-		Vector2[] otherScreenSpaceArr = toScreenSpace (otherColliderPointArr);
+		Vector2[] thisScreenSpaceArr = toScreenSpace (thisColliderPointArr, GetComponent<PolygonCollider2D> ());
+		Vector2[] otherScreenSpaceArr = toScreenSpace (otherColliderPointArr, otherCollider);
 
 		List<IntPoint> thisList = toIntPointList (thisScreenSpaceArr);
 		List<IntPoint> otherList = toIntPointList (otherScreenSpaceArr);
@@ -54,7 +54,7 @@ public class SpriteBooleanOperator : MonoBehaviour {
 
 		Vector2[] solutionVec2Arr = toVec2Arr (solution[0]);
 		Debug.Log (solution.Count);
-		GetComponent<PolygonCollider2D> ().points = toWorldSpace(solutionVec2Arr);
+		GetComponent<PolygonCollider2D> ().points = toWorldSpace(solutionVec2Arr, GetComponent<PolygonCollider2D> ());
 	}
 
 	// TODO overload operator + in extension class
@@ -75,18 +75,26 @@ public class SpriteBooleanOperator : MonoBehaviour {
 		return newList;
 	}
 
-	private Vector2[] toScreenSpace(Vector2[] arr) {
+	private Vector2[] toScreenSpace(Vector2[] arr, PolygonCollider2D col) {
 		Vector2[] newArr = new Vector2[arr.Length];
 		for (int i = 0; i < arr.Length; i++) {
-			newArr [i] = Camera.main.WorldToScreenPoint(arr [i]);
+			if (i % 40 == 0) {
+				Debug.Log ("=====================");
+				Debug.Log (arr [i]);
+				Debug.Log(Camera.main.WorldToScreenPoint (arr [i]));
+				Debug.Log (Camera.main.WorldToScreenPoint (col.transform.TransformPoint(arr [i])));
+				Debug.Log ("=====================");
+			}
+			newArr [i] = Camera.main.WorldToScreenPoint (col.transform.TransformPoint(arr [i]));
+				//Camera.main.WorldToScreenPoint(arr [i]);
 		}
 		return newArr;
 	}
 
-	private Vector2[] toWorldSpace(Vector2[] arr) {
+	private Vector2[] toWorldSpace(Vector2[] arr, PolygonCollider2D col) {
 		Vector2[] newArr = new Vector2[arr.Length];
 		for (int i = 0; i < arr.Length; i++) {
-			newArr [i] = Camera.main.ScreenToWorldPoint(arr [i]);
+			newArr [i] = Camera.main.ScreenToWorldPoint(col.transform.InverseTransformPoint(arr [i]));
 		}
 		return newArr;
 	}

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4098226280090396}
   - component: {fileID: 331198549831173074}
   m_Layer: 0
-  m_Name: DinoHole
+  m_Name: Dino hole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
