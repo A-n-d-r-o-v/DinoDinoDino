@@ -94,7 +94,7 @@ public class SpriteBooleanOperator : MonoBehaviour {
 	private Vector2[] toWorldSpace(Vector2[] arr, PolygonCollider2D col) {
 		Vector2[] newArr = new Vector2[arr.Length];
 		for (int i = 0; i < arr.Length; i++) {
-			newArr [i] = Camera.main.ScreenToWorldPoint(col.transform.InverseTransformPoint(arr [i]));
+			newArr [i] = col.transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(arr [i]));
 		}
 		return newArr;
 	}
