@@ -27,8 +27,9 @@ public class SpriteBooleanOperator : MonoBehaviour {
 				otherCollider = otherObject.GetComponent<PolygonCollider2D> ();
 			}
 			RemoveGeometryFromCollider (otherCollider);
-			Instantiate (spriteMask, otherObject.transform.position, otherObject.transform.rotation);
-			spriteMask.gameObject.name = "Dino hole";
+			SpriteMask mask = Instantiate (spriteMask, otherObject.transform.position, otherObject.transform.rotation);
+			mask.gameObject.name = "Hole mask";
+			mask.gameObject.transform.SetParent (gameObject.transform);
 
 			Destroy (otherObject);
 		}
@@ -39,8 +40,7 @@ public class SpriteBooleanOperator : MonoBehaviour {
 	private void RemoveGeometryFromCollider(PolygonCollider2D otherCollider) {
 		// Vec2 array of this gameobjects poly collider (geometry to modify)
 		Vector2[] thisColliderPointArr = GetComponent<PolygonCollider2D> ().points;
-		Vector2 positionOffset = otherCollider.gameObject.transform.position - transform.position;
-		Vector2[] otherColliderPointArr = otherCollider.points;//sum(otherCollider.points, positionOffset);
+		Vector2[] otherColliderPointArr = otherCollider.points;
 
 		// Vec2 array of the other gameobjects poly collider (hole geometry)
 		Vector2[] thisScreenSpaceArr = ToGlobalScreenSpace (thisColliderPointArr, GetComponent<PolygonCollider2D> ());
